@@ -17,6 +17,10 @@ include(BallanceVersion)
 include(BallanceBuildManifest)
 include(CTest)
 
-add_subdirectory(Source)
-
-include(BallanceStage)
+if (BALLANCE_HEADLESS_ONLY)
+    message(STATUS "[Ballance] Configuring headless-only targets")
+    add_subdirectory(Source/Headless)
+else ()
+    add_subdirectory(Source)
+    include(BallanceStage)
+endif ()

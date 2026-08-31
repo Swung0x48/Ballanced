@@ -1,5 +1,11 @@
 # Root-only options and child-project defaults for the superproject.
 
+ballance_set_cache_default(BALLANCE_HEADLESS_ONLY OFF BOOL
+        "Configure only server/headless targets without SDL, rendering, audio, input, or Player")
+ballance_set_cache_default(PHYSICS_RT_SOLVER_COMPATIBILITY_ID
+        "ivp-2.1-authority-66hz-v1" STRING
+        "Cross-platform physics_RT solver compatibility identifier")
+
 ballance_set_cache_default(BALLANCE_AUTO_DETECT_ASSETS OFF BOOL
         "Use the repository-local assets directory for staging when it exists")
 ballance_set_cache_default(BALLANCE_ASSETS_ROOT "" PATH
@@ -23,7 +29,9 @@ ballance_set_cache_default(BALLANCE_BUILD_STATIC OFF BOOL
 ballance_set_cache_default(BALLANCE_TARGET_ARCH "" STRING
         "Optional target architecture label used by platform presets")
 
-find_package(SDL3 CONFIG REQUIRED)
+if (NOT BALLANCE_HEADLESS_ONLY)
+    find_package(SDL3 CONFIG REQUIRED)
+endif ()
 
 foreach (_component IN ITEMS VXMATH CK2 CKRE)
     if (BALLANCE_BUILD_STATIC)

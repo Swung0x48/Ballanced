@@ -196,6 +196,16 @@ if (BALLANCE_HEADLESS_ONLY)
     add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../BuildingBlocks"
             "${CMAKE_CURRENT_BINARY_DIR}/BuildingBlocks")
 
+    if (WIN32 AND TARGET InterfaceStatic)
+        # The server keeps Interface BB type/behavior registration for strict
+        # map loading, but it has no display or system-font device context.
+        # CKBuildingBlocks already provides this windowless implementation;
+        # scope it to the Windows headless target so ordinary clients and the
+        # Linux stb font backend retain their existing behavior.
+        target_compile_definitions(InterfaceStatic PRIVATE
+                FONTMANAGER_NOSYSFONT=1)
+    endif ()
+
     foreach (_ballance_headless_required_target IN ITEMS
             CK2Static
             CKRasterizerLib

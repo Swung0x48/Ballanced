@@ -315,6 +315,14 @@ int main() {
                     (BALLANCE_HEADLESS_PLUGIN_ENGINE |
                      BALLANCE_HEADLESS_PLUGIN_NO_BACKEND) ||
             BallanceHeadlessRuntime_ClassifyPlugin(
+                CKPLUGIN_SOUND_READER, 0x61abc44fu, 0xe1233343u,
+                &classification) != BALLANCE_HEADLESS_OK ||
+            (classification.flags &
+             (BALLANCE_HEADLESS_PLUGIN_PRESENTATION |
+              BALLANCE_HEADLESS_PLUGIN_NO_BACKEND)) !=
+                    (BALLANCE_HEADLESS_PLUGIN_PRESENTATION |
+                     BALLANCE_HEADLESS_PLUGIN_NO_BACKEND) ||
+            BallanceHeadlessRuntime_ClassifyPlugin(
                 CKPLUGIN_BEHAVIOR_DLL, 0xdeadbeefu, 0xbaadf00du,
                 &classification) != BALLANCE_HEADLESS_ERROR_UNKNOWN_PLUGIN ||
             BallanceHeadlessRuntime_ClassifyPlugin(

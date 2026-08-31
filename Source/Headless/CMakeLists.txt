@@ -146,7 +146,10 @@ if (BALLANCE_HEADLESS_ONLY)
 
     set(CKPLUGINS_BUILD_AVIREADER OFF CACHE BOOL "" FORCE)
     set(CKPLUGINS_BUILD_IMAGEREADER OFF CACHE BOOL "" FORCE)
-    set(CKPLUGINS_BUILD_WAVREADER OFF CACHE BOOL "" FORCE)
+    # WAV decoding is an asset reader used by the original levels.  It is
+    # independent of the SDL sound-output manager and is therefore part of the
+    # certified headless graph.
+    set(CKPLUGINS_BUILD_WAVREADER ON CACHE BOOL "" FORCE)
     set(CKPLUGINS_BUILD_VIRTOOLSLOADER ON CACHE BOOL "" FORCE)
     set(CKPLUGINS_BUILD_SHARED OFF CACHE BOOL "" FORCE)
     set(CKPLUGINS_BUILD_STATIC ON CACHE BOOL "" FORCE)
@@ -199,6 +202,7 @@ if (BALLANCE_HEADLESS_ONLY)
             CK2_3DHeadlessStatic
             ParameterOperationsStatic
             VirtoolsLoaderStatic
+            WavReaderStatic
             3DTransStatic
             BuildingBlocksAddons1Static
             CamerasStatic
@@ -259,6 +263,7 @@ if (BALLANCE_HEADLESS_ONLY)
             CK2_3DHeadlessStatic
             ParameterOperationsStatic
             VirtoolsLoaderStatic
+            WavReaderStatic
             3DTransStatic
             BuildingBlocksAddons1Static
             CamerasStatic

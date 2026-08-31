@@ -16,6 +16,9 @@ CKPluginInfo *CKGet_ParamOp_PluginInfo(int index);
 int CKGet_NemoLoader_PluginInfoCount();
 CKPluginInfo *CKGet_NemoLoader_PluginInfo(int index);
 CKDataReader *CKGet_NemoLoader_Reader(int index);
+int CKGet_WavReader_PluginInfoCount();
+CKPluginInfo *CKGet_WavReader_PluginInfo(int index);
+CKDataReader *CKGet_WavReader_Reader(int index);
 
 #define BALLANCE_DECLARE_STATIC_BB(symbol)                                  \
     int CKGet_##symbol##_PluginInfoCount();                                 \
@@ -75,6 +78,9 @@ constexpr StaticPluginPolicy kStaticPluginPolicies[] = {
          kAvailable | BALLANCE_HEADLESS_PLUGIN_ENGINE},
         {"BallanceHeadless.VirtoolsLoader",
          kAvailable | BALLANCE_HEADLESS_PLUGIN_ENGINE},
+        {"BallanceHeadless.WavReader",
+         kAvailable | BALLANCE_HEADLESS_PLUGIN_PRESENTATION |
+                 BALLANCE_HEADLESS_PLUGIN_NO_BACKEND},
         {"BallanceHeadless.BB.3DTransfo",
          kAvailable | BALLANCE_HEADLESS_PLUGIN_GAMEPLAY},
         {"BallanceHeadless.BB.BuildingBlocksAddons1",
@@ -199,6 +205,11 @@ int32_t RegisterHeadlessStaticPlugins() {
                     CKGet_NemoLoader_PluginInfoCount,
                     CKGet_NemoLoader_PluginInfo,
                     CKGet_NemoLoader_Reader) ||
+            !RegisterStaticPlugin(pluginManager,
+                    "BallanceHeadless.WavReader",
+                    CKGet_WavReader_PluginInfoCount,
+                    CKGet_WavReader_PluginInfo,
+                    CKGet_WavReader_Reader) ||
             !RegisterBehaviorPlugin(pluginManager,
                     "BallanceHeadless.BB.3DTransfo",
                     CKGet_3DTransfo_PluginInfoCount,
@@ -385,9 +396,11 @@ int32_t VerifyRegisteredComponents() {
                     "BallanceHeadless.ParameterOperations") ||
             !pluginManager->GetPluginDllInfo("BallanceHeadless.InputStub") ||
             !pluginManager->GetPluginDllInfo("BallanceHeadless.VirtoolsLoader") ||
+            !pluginManager->GetPluginDllInfo("BallanceHeadless.WavReader") ||
             !pluginManager->GetPluginDllInfo("BallanceHeadless.physics_RT") ||
             pluginManager->GetPluginCount(CKPLUGIN_RENDERENGINE_DLL) != 1 ||
-            pluginManager->GetPluginCount(CKPLUGIN_MODEL_READER) != 4) {
+            pluginManager->GetPluginCount(CKPLUGIN_MODEL_READER) != 4 ||
+            pluginManager->GetPluginCount(CKPLUGIN_SOUND_READER) != 1) {
         return BALLANCE_HEADLESS_ERROR_INCOMPATIBLE_COMPONENT;
     }
 

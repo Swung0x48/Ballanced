@@ -2,6 +2,22 @@
 # targets deliberately do not enter the SDL-backed VxMath project so that a
 # server-only configure works on machines where SDL is not installed.
 
+if (MSVC AND BALLANCE_HEADLESS_ONLY)
+    # CMake's MSVC platform defaults add these libraries to every executable's
+    # explicit link line. Remove them for the server-only directory so the
+    # headless targets cannot silently regain Win32 UI or GDI dependencies.
+    foreach (_ballance_headless_language IN ITEMS C CXX)
+        separate_arguments(_ballance_headless_standard_libraries WINDOWS_COMMAND
+                "${CMAKE_${_ballance_headless_language}_STANDARD_LIBRARIES}")
+        list(FILTER _ballance_headless_standard_libraries EXCLUDE REGEX
+                "^(user32|gdi32)\\.lib$")
+        string(JOIN " " _ballance_headless_standard_libraries
+                ${_ballance_headless_standard_libraries})
+        set(CMAKE_${_ballance_headless_language}_STANDARD_LIBRARIES
+                "${_ballance_headless_standard_libraries}")
+    endforeach ()
+endif ()
+
 set(_ballance_vxmath_root "${CMAKE_CURRENT_LIST_DIR}/../VxMath")
 set(_ballance_vxmath_include "${_ballance_vxmath_root}/include")
 set(_ballance_vxmath_source "${_ballance_vxmath_root}/src")

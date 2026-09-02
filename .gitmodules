@@ -3,7 +3,7 @@
 	url = https://github.com/doyaGu/BallancePlayer.git
 [submodule "Source/VxMath"]
 	path = Source/VxMath
-	url = https://github.com/doyaGu/VxMath.git
+	url = https://github.com/Swung0x48/VxMath.git
 [submodule "Source/CK2"]
 	path = Source/CK2
 	url = https://github.com/doyaGu/CK2.git
@@ -12,7 +12,7 @@
 	url = https://github.com/doyaGu/CKRenderEngine.git
 [submodule "Source/BuildingBlocks"]
 	path = Source/BuildingBlocks
-	url = https://github.com/doyaGu/CKBuildingBlocks.git
+	url = https://github.com/Swung0x48/CKBuildingBlocks.git
 [submodule "Source/Plugins"]
 	path = Source/Plugins
 	url = https://github.com/doyaGu/CKPlugins.git

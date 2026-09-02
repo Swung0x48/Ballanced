@@ -1,6 +1,6 @@
 [submodule "Source/Player"]
 	path = Source/Player
-	url = https://github.com/doyaGu/BallancePlayer.git
+	url = https://github.com/Swung0x48/BallancePlayer.git
 [submodule "Source/VxMath"]
 	path = Source/VxMath
 	url = https://github.com/Swung0x48/VxMath.git
